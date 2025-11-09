@@ -1,0 +1,11 @@
+# PlatformIO
+.pio
+.pioenvs
+.piolibdeps
+
+# CLion
+.idea/*
+!.idea/runConfigurations/
+!.idea/misc.xml
+!.idea/modules.xml
+!*.iml
