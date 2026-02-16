@@ -20,5 +20,5 @@
 
 // Настройки
 
-#define LEDS_NUM 98
-#define BRIGHT 100
+#define LEDS_NUM 99
+#define BRIGHT 200

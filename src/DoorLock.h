@@ -1,4 +1,5 @@
 #pragma once
+#include "config.h"
 #include "Arduino.h"
 
 class DoorLock {
@@ -27,3 +28,5 @@ public:
     /// Get door lock state
     bool getState() const { return locked; }
 };
+
+static DoorLock lock(DOOR_LOCK_PIN);
