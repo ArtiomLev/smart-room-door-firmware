@@ -22,4 +22,4 @@
 //Алиасы
 
 #define BUILTIN_BUTTON 0
-#define BUILTIN_LED 2
+#define LED_BUILTIN 2

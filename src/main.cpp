@@ -44,8 +44,8 @@ void build(gh::Builder &b);
 
 void setup() {
     // Настройка пинов
-    pinMode(BUILTIN_LED, OUTPUT);
-    digitalWrite(BUILTIN_LED, HIGH);
+    pinMode(LED_BUILTIN, OUTPUT);
+    digitalWrite(LED_BUILTIN, HIGH);
     pinMode(LED_PIN, OUTPUT);
 
     // Инициализация UART
@@ -102,7 +102,6 @@ void loop() {
         hub.sendUpdate("door_closed_led");
         Serial.println("Switch!");
     }
-    digitalWrite(BUILTIN_LED, !lock.getState());
     Serial.printf("LIB\t"
                   "Lock: %d\t"
                   "Button: %d\t"
@@ -130,6 +129,7 @@ void loop() {
         FastLED.show();
         effect_tmr = millis();
     }*/
+        digitalWrite(LED_BUILTIN, !lock.getState());
 
     hub.tick();
 }
