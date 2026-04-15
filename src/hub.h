@@ -12,3 +12,7 @@ namespace hub {
     void tick();
     void builder(gh::Builder &b);
 }
+
+#ifdef H
+#undef H
+#endif
