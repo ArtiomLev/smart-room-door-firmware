@@ -1,11 +1,15 @@
 #include "led.h"
 
-CRGB led::leds[LEDS_NUM];
+NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart1Ws2812Method> led::strip(LEDS_NUM, LED_PIN);
 
 
 void led::setup() {
-    // Инициализация ленты в FastLED
-    FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, LEDS_NUM);
+    strip.Begin();
+    RgbColor color(0, 0, 200);
+    for (uint8_t i = 0; i < LEDS_NUM; i++) {
+        strip.SetPixelColor(i, color);
+    }
+    strip.Show();
 }
 
 void led::tick() {

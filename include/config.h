@@ -10,7 +10,7 @@
 // Выводы
 
 #define DOOR_LOCK_PIN D0_PIN
-#define LED_PIN D1_PIN
+#define LED_PIN D4_PIN
 
 #define LEFT_ROT_BTN D2_PIN
 #define RIGHT_ROT_BTN D5_PIN

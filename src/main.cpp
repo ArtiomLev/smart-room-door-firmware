@@ -42,11 +42,6 @@ void setup() {
 
     led::setup();
 
-    for (byte i = 0; i < LEDS_NUM; i++) {
-        led::leds[i] = CRGB::Red;
-    }
-    FastLED.setBrightness(10);
-    FastLED.show();
 }
 
 void loop() {
