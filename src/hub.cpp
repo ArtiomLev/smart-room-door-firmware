@@ -3,6 +3,8 @@
 
 #include "ESP8266WiFi.h"
 
+#include "ArduinoOTA.h"
+
 GyverHub hub::hub("MyDevices", "Door", "f52a"); // имя сети, имя устройства, иконка
 SoftwareSerial hub::softSerial(HUB_SERIAL_RX,HUB_SERIAL_TX); // Software serial for GyverHUB
 
@@ -22,6 +24,9 @@ void hub::setup() {
     Serial.println(WiFi.localIP());
     Serial.println();
 
+    ArduinoOTA.setHostname("DoorControllerESP8266");
+    ArduinoOTA.begin();
+
     // Инициализация GyverHUB
     hub.stream.config(&softSerial, gh::Connection::Serial);
     //hub.stream.config(&Serial, gh::Connection::Serial);
@@ -31,6 +36,7 @@ void hub::setup() {
 
 void hub::tick() {
     hub.tick();
+    ArduinoOTA.handle();
 }
 
 void hub::builder(gh::Builder &b) {
