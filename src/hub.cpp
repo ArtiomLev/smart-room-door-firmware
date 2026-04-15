@@ -46,15 +46,18 @@ void hub::builder(gh::Builder &b) {
             gh::Col c(b);
             if (b.Button().label("Open").icon("f3c1").click()) {
                 lock.setState(false);
-                hub.update("door_closed_led").value(lock.locked);
+                if (b.build.client.connection() == gh::Connection::HTTP) {
+                    hub.sendRefresh();
+                } else
+                    hub.update("door_closed_led").value(lock.locked);
             }
             if (b.Button().label("Close").icon("f023").click()) {
                 lock.setState(true);
-                hub.update("door_closed_led").value(lock.locked);
+                if (b.build.client.connection() == gh::Connection::HTTP) {
+                    hub.sendRefresh();
+                } else
+                    hub.update("door_closed_led").value(lock.locked);
             }
         }
     }
 }
-
-
-
