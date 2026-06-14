@@ -6,16 +6,13 @@
 // Libs
 // ---------------------------------------------------------------------------------------------------------------------
 
-#include "EncButton.h"
-Button builtin_btn(BUILTIN_BUTTON);
-Button left_rot_btn(LEFT_ROT_BTN);
-Button right_rot_btn(RIGHT_ROT_BTN);
 
 // =====================================================================================================================
 // Modules
 // ---------------------------------------------------------------------------------------------------------------------
 
 #include "DoorLock.h"
+#include "buttons.h"
 #include "hub.h"
 #include "led.h"
 
@@ -45,11 +42,9 @@ void setup() {
 }
 
 void loop() {
-    builtin_btn.tick();
-    left_rot_btn.tick();
-    right_rot_btn.tick();
+    buttons::tick();
 
-    if (builtin_btn.click()) {
+    if (buttons::builtin_btn.click()) {
         lock.toggle();
         hub::hub.sendUpdate("door_closed_led");
         Serial.println("Switch!");
@@ -65,9 +60,9 @@ void loop() {
                       "Left: %d\t"
                       "Right: %d\t\n",
                       lock.getState(),
-                      builtin_btn.pressing(),
-                      left_rot_btn.pressing(),
-                      right_rot_btn.pressing());
+                      buttons::builtin_btn.pressing(),
+                      buttons::left_rot_btn.pressing(),
+                      buttons::right_rot_btn.pressing());
     }
 
     led::tick();
