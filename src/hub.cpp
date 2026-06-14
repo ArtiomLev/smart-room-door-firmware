@@ -1,5 +1,6 @@
 #include "hub.h"
 #include "DoorLock.h"
+#include "buttons.h"
 
 #include "ESP8266WiFi.h"
 
@@ -40,6 +41,11 @@ void hub::tick() {
 }
 
 void hub::builder(gh::Builder &b) {
+    b.Menu("Защёлка;Подсветка;Отладка ввода/вывода");
+
+    // === Menu 0 ===
+    b.show(b.menu() == 0);
+
     {
         gh::Row r(b);
         b.LED_("door_closed_led", &lock.locked).label("Closed"); {
@@ -59,5 +65,27 @@ void hub::builder(gh::Builder &b) {
                     hub.update("door_closed_led").value(lock.locked);
             }
         }
+    }
+
+    // === Menu 1 ===
+    b.show(b.menu() == 1);
+
+
+    // === Menu 2 ===
+    // Input debug
+    b.show(b.menu() == 2);
+    {
+        b.Title("Ввод:");
+        {
+            gh::Row r(b);
+            bool left_bnt_press = buttons::left_rot_btn.pressing();
+            b.LED_("left_btn_state", &left_bnt_press).label("Left rotation");
+            bool right_bnt_press = buttons::right_rot_btn.pressing();
+            b.LED_("right_btn_state", &right_bnt_press).label("Right rotation");
+            bool builtin_btn_press = buttons::builtin_btn.pressing();
+            b.LED_("builtin_btn_state", &builtin_btn_press).label("Builtin button");
+        }
+        b.Title("Вывод:");
+        b.LED_("lock_state_led", &lock.locked).label("Lock");
     }
 }
